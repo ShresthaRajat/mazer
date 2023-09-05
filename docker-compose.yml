@@ -35,7 +35,7 @@ services:
             - SECRET_KEY
             - MONGO_INITDB_ROOT_USERNAME
             - MONGO_INITDB_ROOT_PASSWORD
-            - MONGO_IP="10.10.0.10"
+            - MONGO_IP=10.10.0.10
 
 networks:
     backend:
