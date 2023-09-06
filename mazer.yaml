@@ -1,0 +1,48 @@
+namespace: mazer
+mazer:
+  defines: runnable
+  metadata:
+    name: mazer
+    description: An application for generating mazes, with user management features.
+    icon: https://emojiapi.dev/api/v1/robot.svg
+  containers:
+    mazer:
+      build: .
+  services:
+    http:
+      container: mazer
+      port: 80
+      host-port: 80
+      publish: false
+      protocol: TCP
+      description: Port used for the web server.
+  connections:
+    mongodb:
+      target: mongodb/mongodb
+      service: mongodb
+  variables:
+    debug:
+      env: DEBUG
+      type: string
+      description: Enable or disable debug mode.
+      value: 'False'
+    secret-key:
+      env: SECRET_KEY
+      type: string
+      description: Key used for encrypting user sessions.
+      value: '!!!SETME!!!'
+    mongo-initdb-root-username:
+      env: MONGO_INITDB_ROOT_USERNAME
+      type: string
+      description: Username for the MongoDB database.
+      value: '!!!SETME!!!'
+    mongo-initdb-root-password:
+      env: MONGO_INITDB_ROOT_PASSWORD
+      type: string
+      description: Password for the MongoDB database.
+      value: '!!!SETME!!!'
+    mongo-ip:
+      env: MONGO_IP
+      type: string
+      description: Hostname or IP address of the MongoDB server.
+      value: <- connection-hostname("mongodb")
